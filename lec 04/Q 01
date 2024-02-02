@@ -1,0 +1,47 @@
+using System;
+using System.Collections.Generic;
+
+class Subject
+{
+    public string StudentName { get; set; }
+    public Dictionary<string, int> Grades { get; set; }
+
+    public Subject(string studentName, int subject1Grade, int subject2Grade, int subject3Grade)
+    {
+        StudentName = studentName;
+Grades = new Dictionary<string, int>
+        {
+            { "Subject1", subject1Grade },
+            { "Subject2", subject2Grade },
+            { "Subject3", subject3Grade }
+        };
+    }
+
+    public void DisplayGrades()
+{
+    Console.WriteLine($"Grades for {StudentName}:");
+    foreach (var subject in Grades)
+    {
+        Console.WriteLine($"{subject.Key}: {subject.Value}");
+    }
+    Console.WriteLine();
+}
+}
+
+class Program
+{
+    static void Main()
+    {
+        List<Subject> subjects = new List<Subject>();
+
+        // Adding students and their grades
+        subjects.Add(new Subject("John Doe", 90, 85, 78));
+        subjects.Add(new Subject("Jane Smith", 88, 92, 95));
+
+        // Displaying grades for each student
+        foreach (var subject in subjects)
+        {
+            subject.DisplayGrades();
+        }
+    }
+}
