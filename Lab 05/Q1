@@ -1,0 +1,53 @@
+using System;
+
+public class BankAccount
+{
+    private double balance;
+
+    // Constructor to initialize the bank account with an initial balance
+    public BankAccount(double initialBalance)
+    {
+        if (initialBalance < 0)
+        {
+            throw new ArgumentException("Initial balance must be non-negative.");
+        }
+
+        balance = initialBalance;
+    }
+
+    // Method to deposit money into the bank account
+    public void Deposit(double amount)
+    {
+        if (amount < 0)
+        {
+            throw new ArgumentException("Deposit amount must be non-negative.");
+        }
+
+        balance += amount;
+        Console.WriteLine($"Deposited ${amount}. New balance: ${balance}");
+    }
+
+    // Method to get the current bank balance
+    public double GetBalance()
+    {
+        return balance;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create a new bank account with an initial balance of $1000
+        BankAccount myAccount = new BankAccount(2000);
+
+        // Display the initial balance
+        Console.WriteLine($"Initial balance: ${myAccount.GetBalance()}");
+
+        // Deposit $200 into the account
+        myAccount.Deposit(200);
+
+        // Display the updated balance
+        Console.WriteLine($"Updated balance: ${myAccount.GetBalance()}");
+    }
+}
