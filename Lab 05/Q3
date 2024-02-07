@@ -1,0 +1,40 @@
+using System;
+
+class BankAccount
+{
+    public string AccountNumber { get; }
+    public double Balance { get; private set; }
+
+    public BankAccount(string accountNumber, double initialBalance)
+    {
+        AccountNumber = accountNumber;
+        Balance = initialBalance;
+    }
+
+    public void Deposit(double amount)
+    {
+        if (amount > 0)
+        {
+            Balance += amount;
+            Console.WriteLine($"Successfully deposited ${amount}. Updated balance: ${Balance}");
+        }
+        else
+        {
+            Console.WriteLine("Invalid deposit amount. Amount must be greater than zero.");
+        }
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Instantiate a BankAccount object with initial balance
+        BankAccount myAccount = new BankAccount("123456789", 1000.0);
+
+        // Deposit money into the account
+        Console.Write("Enter deposit amount: $");
+        double depositAmount = double.Parse(Console.ReadLine());
+        myAccount.Deposit(depositAmount);
+    }
+}
