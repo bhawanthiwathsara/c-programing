@@ -1,0 +1,80 @@
+using System;
+
+public class Course
+{
+    private string courseName;
+    private string instructorName;
+    private double grade;
+
+    public Course(string courseName, string instructorName, double grade)
+    {
+        this.CourseName = courseName;
+        this.SetInstructorName(instructorName);
+        this.Grade = grade;
+    }
+
+    public string CourseName { get; }
+
+    public double Grade
+    {
+        get { return grade; }
+        private set
+        {
+            if (value < 0 || value > 100)
+            {
+                throw new ArgumentOutOfRangeException(nameof(Grade), "Grade must be between 0 and 100.");
+            }
+            grade = value;
+        }
+    }
+
+    public void SetInstructorName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentException("Instructor name cannot be empty or null.", nameof(name));
+        }
+        instructorName = name;
+    }
+
+    private string CalculateLetterGrade()
+    {
+        if (Grade >= 90)
+        {
+            return "A";
+        }
+        else if (Grade >= 80)
+        {
+            return "B";
+        }
+        else if (Grade >= 70)
+        {
+            return "C";
+        }
+        else if (Grade >= 60)
+        {
+            return "D";
+        }
+        else
+        {
+            return "F";
+        }
+    }
+
+    public void PrintCourseInfo()
+    {
+        Console.WriteLine($"Course: {CourseName}");
+        Console.WriteLine($"Instructor: {instructorName}");
+        Console.WriteLine($"Letter Grade: {CalculateLetterGrade()}");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Example usage:
+        Course course = new Course("Math", "John Doe", 87);
+        course.PrintCourseInfo();
+    }
+}
