@@ -1,0 +1,70 @@
+using System;
+
+class Product
+{
+    private int productId;
+    private string productName;
+    private double price;
+    private int quantityInStock;
+
+    public Product(int productId, string productName, double price, int quantityInStock)
+    {
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+        this.quantityInStock = quantityInStock;
+    }
+
+    public string ProductName
+    {
+        get { return productName; }
+        // No set accessor as we don't want the product name to be modified after creation
+    }
+
+    public double Price
+    {
+        get { return price; }
+        // No set accessor as we don't want the price to be modified after creation
+    }
+
+    public int QuantityInStock
+    {
+        get { return quantityInStock; }
+        set
+        {
+            if (value >= 0)
+            {
+                quantityInStock = value;
+            }
+            else
+            {
+                Console.WriteLine("Quantity in stock cannot be negative.");
+            }
+        }
+    }
+
+    public void DisplayProductInfo()
+    {
+        Console.WriteLine($"Product Name: {productName}");
+        Console.WriteLine($"Price: ${price}");
+        Console.WriteLine($"Quantity in Stock: {quantityInStock}");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create an instance of Product
+        Product product = new Product(101, "Laptop", 800, 10);
+
+        // Access and display product details
+        product.DisplayProductInfo();
+
+        // Attempt to modify the product's ID from external code
+        // This line would cause a compilation error because productId has no set accessor
+        // product.productId = 102;
+
+        Console.ReadLine();
+    }
+}
